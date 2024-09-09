@@ -4,25 +4,23 @@ import com.roman.customer_cloud_stream.domain.*;
 import com.roman.customer_cloud_stream.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
+import org.springframework.context.annotation.Configuration;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Sinks;
 import java.util.function.Supplier;
 
-@Component
-@RequiredArgsConstructor
+@Configuration
 public class CustomerMessaging {
-    private final CustomerService customerService;
 
     @Bean
-    public Supplier<Customer> customerSupplier(){
-        return () -> {
-            Customer customer = Customer.create(
-                    FirstName.of("James"),
-                    LastName.of("Gosling"),
-                    BirthDate.of(LocalDate.of(1965, 11, 21)),
-                    EmailAddress.of("james.jdk@hotmail.com"));
-            return customerService.createCustomer(customer);
-        };
+    public Sinks.Many<Customer> customerProducer(){
+        return Sinks.many()
+                .replay()
+                .latest();
+    }
+
+    @Bean
+    public Supplier<Flux<Customer>> customerSupplier(){
+        return () -> customerProducer().asFlux();
     }
 }
