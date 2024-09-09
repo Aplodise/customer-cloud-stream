@@ -4,19 +4,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 
-
-@Data
 @Entity
+@Getter
+@NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
-    private String emailAddress;
+    private FirstName firstName;
+    private LastName lastName;
+    private BirthDate birthDate;
+    private EmailAddress emailAddress;
+
+    private Customer(FirstName firstName, LastName lastName, BirthDate birthDate, EmailAddress emailAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.emailAddress = emailAddress;
+    }
+    public static Customer create(FirstName firstName, LastName lastName, BirthDate birthDate, EmailAddress emailAddress){
+        return new Customer(firstName, lastName, birthDate, emailAddress);
+    }
+
+    public void changeEmail(final EmailAddress emailAddress){
+        this.emailAddress = emailAddress;
+    }
 }
