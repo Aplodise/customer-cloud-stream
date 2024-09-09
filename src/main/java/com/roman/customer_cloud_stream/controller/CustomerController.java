@@ -3,6 +3,7 @@ package com.roman.customer_cloud_stream.controller;
 
 import com.roman.customer_cloud_stream.controller.dto.CustomerDTO;
 import com.roman.customer_cloud_stream.domain.*;
+import com.roman.customer_cloud_stream.mapper.CustomerMapper;
 import com.roman.customer_cloud_stream.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +21,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> create(@RequestBody @Valid final CustomerDTO customerDTO){
-
-        FirstName firstName = FirstName.of(customerDTO.firstName());
-        LastName lastName = LastName.of(customerDTO.lastName());
-        BirthDate birthDate = BirthDate.of(customerDTO.birthDate());
-        EmailAddress emailAddress = EmailAddress.of(customerDTO.emailAddress());
-        Customer customer = Customer.create(firstName, lastName, birthDate, emailAddress);
-        var createdCustomer = customerService.createCustomer(customer);
+        var createdCustomer = customerService.createCustomer(CustomerMapper.mapToCustomer(customerDTO));
         return ResponseEntity.ok(createdCustomer);
     }
 }
