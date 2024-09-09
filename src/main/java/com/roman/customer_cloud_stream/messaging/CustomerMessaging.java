@@ -1,6 +1,7 @@
 package com.roman.customer_cloud_stream.messaging;
 
-import com.roman.customer_cloud_stream.domain.*;
+
+import com.roman.customer_cloud_stream.messaging.event.CustomerEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
@@ -11,14 +12,14 @@ import java.util.function.Supplier;
 public class CustomerMessaging {
 
     @Bean
-    public Sinks.Many<Customer> customerProducer(){
+    public Sinks.Many<CustomerEvent> customerProducer(){
         return Sinks.many()
                 .replay()
                 .latest();
     }
 
     @Bean
-    public Supplier<Flux<Customer>> customerSupplier(){
+    public Supplier<Flux<CustomerEvent>> customerSupplier(){
         return () -> customerProducer().asFlux();
     }
 }
