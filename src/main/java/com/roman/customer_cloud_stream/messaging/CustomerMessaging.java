@@ -1,8 +1,6 @@
 package com.roman.customer_cloud_stream.messaging;
 
 import com.roman.customer_cloud_stream.domain.*;
-import com.roman.customer_cloud_stream.service.CustomerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
