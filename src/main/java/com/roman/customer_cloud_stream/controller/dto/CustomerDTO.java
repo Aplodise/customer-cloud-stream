@@ -16,5 +16,7 @@ public record CustomerDTO(@NotBlank(message = "first name cannot be blank")
                           LocalDate birthDate,
                           @NotBlank(message = "email cannot be blank")
                           @Email(message = "please provide a valid email address")
-                          String emailAddress) {
+                          String emailAddress,
+                          @NotNull(message = "ssn should not be null")
+                          Integer ssn) {
 }
