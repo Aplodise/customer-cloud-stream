@@ -8,7 +8,7 @@ import java.util.Objects;
 @Embeddable
 public record SSN(Integer ssn) {
     public SSN{
-        Objects.requireNonNull(ssn);
+        Objects.requireNonNull(ssn, "SSN could not be null");
         Assert.isTrue(String.valueOf(ssn).toCharArray().length==9, "The ssn must have 9 characters");
     }
     public static SSN of(Integer ssn){

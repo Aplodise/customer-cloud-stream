@@ -10,7 +10,7 @@ import java.util.Objects;
 public record BirthDate(LocalDate birthDate) {
     public BirthDate{
         Objects.requireNonNull(birthDate, "The birthdate cannot be null");
-        Assert.isTrue(!birthDate.isAfter(LocalDate.now()), "The birthdate should be in past");
+        Assert.isTrue(!birthDate.isAfter(LocalDate.now()), "The birthdate should be in the past");
     }
 
     public static BirthDate of(LocalDate date){

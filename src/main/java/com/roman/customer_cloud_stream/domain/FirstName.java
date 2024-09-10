@@ -10,7 +10,7 @@ import java.util.Objects;
 public record FirstName(String firstName) {
 
     public FirstName {
-        Objects.requireNonNull(firstName, "The birthDate of the first name cannot be null");
+        Objects.requireNonNull(firstName, "The first name cannot be null");
         Assert.isTrue(!firstName.isBlank(), "First name cannot be empty");
     }
 

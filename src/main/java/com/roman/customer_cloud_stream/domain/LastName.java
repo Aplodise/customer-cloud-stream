@@ -9,8 +9,8 @@ import java.util.Objects;
 public record LastName(String lastName) {
 
     public LastName {
-        Objects.requireNonNull(lastName, "The birthDate of the first name cannot be null");
-        Assert.isTrue(!lastName.isBlank(), "First name cannot be empty");
+        Objects.requireNonNull(lastName, "The last name cannot be null");
+        Assert.isTrue(!lastName.isBlank(), "Last name cannot be empty");
     }
 
     public static LastName of(final String value) {
