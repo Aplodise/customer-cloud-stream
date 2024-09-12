@@ -1,0 +1,9 @@
+{
+  "customer": {
+    "firstName": "William",
+    "lastName": "Butcher",
+    "birthDate": "2000-12-12",
+    "emailAddress": "email@gmail.com",
+    "ssn": 343434342
+  }
+}
